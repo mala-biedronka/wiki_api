@@ -1,0 +1,25 @@
+{
+  "name": "wiki_api",
+  "version": "1.0.0",
+  "description": "creating wiki api",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mala-biedronka/wiki_api.git"
+  },
+  "author": "Iryna Predborska",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mala-biedronka/wiki_api/issues"
+  },
+  "homepage": "https://github.com/mala-biedronka/wiki_api#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^3.1.2",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.12"
+  }
+}
