@@ -14,7 +14,6 @@ const articleSchema = {
     title: String,
     content: String
 };
-
 const Article = mongoose.model("Article", articleSchema);
 
 //Create a chained route handlers for a /articles route
@@ -93,6 +92,32 @@ app.route("/articles")
 //     });
 // });
 
+
+//Create a chained route handlers for a /articles/bootstrap route
+
+app.route("/articles/:articleTitle")
+    .get(function (req, res) {
+        Article.findOne({title: req.params.articleTitle},function (err, result) {
+            if (result) {
+                res.send(result);
+            } else {
+                res.send("No articles matching the title were found!");
+            }
+        })
+    })
+    .put(function (req, res) {
+        Article.replaceOne(
+            {title: req.params.articleTitle},
+            {title: req.body.title, content: req.body.content},
+            {overwrite: true},
+            function (err) {
+                if (!err) {
+                    res.send("The article was successfully updated!");
+                } else {
+                    res.send(err);
+                }
+            })
+    });
 
 
 app.listen(3000, function () {
