@@ -44,6 +44,16 @@ app.post("/articles", function (req, res) {
 });
 
 
+//DELETE all the articles
+app.delete("/articles", function (req, res) {
+    Article.deleteMany(function (err) {
+        if (!err) {
+            res.send("Successfully deleted all articles!");
+        } else {
+            res.send(err);
+        }
+    });
+});
 
 
 
