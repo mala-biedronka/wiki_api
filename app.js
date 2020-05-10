@@ -97,7 +97,7 @@ app.route("/articles")
 
 app.route("/articles/:articleTitle")
     .get(function (req, res) {
-        Article.findOne({title: req.params.articleTitle},function (err, result) {
+        Article.findOne({title: req.params.articleTitle}, function (err, result) {
             if (result) {
                 res.send(result);
             } else {
@@ -109,7 +109,6 @@ app.route("/articles/:articleTitle")
         Article.replaceOne(
             {title: req.params.articleTitle},
             {title: req.body.title, content: req.body.content},
-            {overwrite: true},
             function (err) {
                 if (!err) {
                     res.send("The article was successfully updated!");
@@ -117,7 +116,31 @@ app.route("/articles/:articleTitle")
                     res.send(err);
                 }
             })
+    })
+    .patch(function (req, res) {
+        Article.updateOne(
+            {title: req.params.articleTitle},
+            {$set: req.body},
+            function (err) {
+                if (!err) {
+                    res.send("The article was successfully updated!");
+                } else {
+                    res.send(err);
+                }
+            })
+    })
+    .delete(function (req, res) {
+        Article.findOneAndDelete(
+            {title: req.params.articleTitle},
+            function (err) {
+                if (!err) {
+                    res.send("The article was successfully deleted!");
+                } else {
+                    res.send(err);
+                }
+            })
     });
+
 
 
 app.listen(3000, function () {
